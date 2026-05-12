@@ -29,21 +29,55 @@ body.childshield-body {
 	background: linear-gradient(90deg, var(--childshield-blue-2), var(--childshield-blue));
 	box-shadow: 0 2px 12px rgba(18, 49, 91, 0.1);
 	z-index: 1030;
+	display: block !important;
+	visibility: visible !important;
+}
+
+.navbar-brand {
+	color: white !important;
+	font-size: 1.25rem;
+	display: flex !important;
+	align-items: center !important;
+	font-weight: bold !important;
+}
+
+.navbar-nav {
+	display: flex !important;
+	visibility: visible !important;
+	gap: 0.5rem;
 }
 
 .navbar-collapse {
 	transition: all 0.3s ease !important;
+	display: flex !important;
+	visibility: visible !important;
+}
+
+.navbar-collapse.show {
+	display: flex !important;
 }
 
 .navbar-toggler {
 	border: none;
 	padding: 0.5rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .navbar-toggler:focus {
 	box-shadow: none;
 	outline: 2px solid rgba(255, 255, 255, 0.5);
 	outline-offset: 2px;
+}
+
+.navbar-toggler-icon {
+	background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255, 255, 255, 0.85%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+	width: 1.5rem;
+	height: 1.5rem;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%;
 }
 
 .childshield-navbar .nav-link {
@@ -331,11 +365,21 @@ body.childshield-body {
 		border-radius: 0.5rem;
 		padding: 1rem 0;
 		margin-top: 0.5rem;
+		display: none !important;
+	}
+
+	.navbar-collapse.show {
+		display: block !important;
 	}
 
 	.childshield-navbar .nav-link {
 		padding: 0.75rem 1rem !important;
 		margin: 0;
+	}
+
+	.navbar-nav {
+		flex-direction: column;
+		gap: 0 !important;
 	}
 
 	.d-flex.gap-2 {
@@ -363,5 +407,37 @@ body.childshield-body {
 	.display-4,
 	.display-5 {
 		font-size: 1.75rem;
+	}
+}
+
+@media (min-width: 992px) {
+	.navbar-collapse {
+		display: flex !important;
+		visibility: visible !important;
+	}
+
+	.navbar-toggler {
+		display: none !important;
+	}
+
+	.navbar-nav {
+		flex-direction: row;
+		gap: 0.5rem !important;
+	}
+
+	.d-flex.gap-2 {
+		display: flex !important;
+		gap: 0.5rem !important;
+		flex-direction: row;
+		width: auto;
+		padding: 0 !important;
+		border-top: none;
+		margin-top: 0 !important;
+		padding-top: 0 !important;
+	}
+
+	.d-flex.gap-2 button,
+	.d-flex.gap-2 a {
+		width: auto;
 	}
 }

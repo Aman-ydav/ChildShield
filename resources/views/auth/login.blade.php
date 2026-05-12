@@ -87,7 +87,7 @@
                 <small class="text-secondary">
                     <strong>Demo Account:</strong><br>
                     Email: admin@childshield.test<br>
-                    Password: admin@123
+                    Password: 12345678
                 </small>
             </div>
         </div>
