@@ -1,103 +1,219 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="row g-4 mb-4">
+    <!-- BREADCRUMB -->
+    <div class="mb-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a href="{{ route('home') }}" class="text-decoration-none">Home</a></li>
+                <li class="breadcrumb-item active">Dashboard</li>
+            </ol>
+        </nav>
+    </div>
+
+    <!-- WELCOME SECTION -->
+    <div class="section-surface p-4 p-lg-5 mb-5 rounded-4 bg-gradient" style="background: linear-gradient(135deg, rgba(18, 49, 91, 0.08) 0%, rgba(255, 107, 0, 0.04) 100%);">
+        <div class="row align-items-center">
+            <div class="col-lg-8">
+                <h1 class="display-5 fw-bold mb-2">Welcome back, {{ auth()->user()->name }}! 👋</h1>
+                <p class="lead text-secondary mb-0">Here's a summary of your reporting activity and impact</p>
+            </div>
+            <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
+                <a href="{{ route('reports.create') }}" class="btn btn-warning btn-lg px-4 fw-semibold">+ Submit New Report</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- STATS CARDS -->
+    <div class="row g-4 mb-5">
         <div class="col-md-3">
-            <div class="card stat-card h-100">
-                <div class="card-body">
-                    <div class="text-secondary small text-uppercase">Total Reports</div>
-                    <div class="display-6 fw-bold text-primary">{{ $reportStats['total'] }}</div>
+            <div class="section-surface p-4 h-100 border-top border-5 border-warning">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <div class="text-secondary small text-uppercase fw-semibold">My Reports</div>
+                        <div class="display-6 fw-bold text-primary mt-2">{{ $reportStats['total'] }}</div>
+                    </div>
+                    <div style="font-size: 2.5rem;">📋</div>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card stat-card h-100">
-                <div class="card-body">
-                    <div class="text-secondary small text-uppercase">Pending</div>
-                    <div class="display-6 fw-bold text-warning">{{ $reportStats['pending'] }}</div>
+            <div class="section-surface p-4 h-100 border-top border-5 border-warning">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <div class="text-secondary small text-uppercase fw-semibold">Pending</div>
+                        <div class="display-6 fw-bold text-warning mt-2">{{ $reportStats['pending'] }}</div>
+                    </div>
+                    <div style="font-size: 2.5rem;">⏳</div>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card stat-card h-100">
-                <div class="card-body">
-                    <div class="text-secondary small text-uppercase">Verified</div>
-                    <div class="display-6 fw-bold text-success">{{ $reportStats['verified'] }}</div>
+            <div class="section-surface p-4 h-100 border-top border-5 border-success">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <div class="text-secondary small text-uppercase fw-semibold">Verified</div>
+                        <div class="display-6 fw-bold text-success mt-2">{{ $reportStats['verified'] }}</div>
+                    </div>
+                    <div style="font-size: 2.5rem;">✅</div>
                 </div>
             </div>
         </div>
         <div class="col-md-3">
-            <div class="card stat-card h-100">
-                <div class="card-body">
-                    <div class="text-secondary small text-uppercase">Resolved</div>
-                    <div class="display-6 fw-bold text-info">{{ $reportStats['resolved'] }}</div>
+            <div class="section-surface p-4 h-100 border-top border-5 border-info">
+                <div class="d-flex align-items-center justify-content-between">
+                    <div>
+                        <div class="text-secondary small text-uppercase fw-semibold">Resolved</div>
+                        <div class="display-6 fw-bold text-info mt-2">{{ $reportStats['resolved'] }}</div>
+                    </div>
+                    <div style="font-size: 2.5rem;">🎯</div>
                 </div>
             </div>
         </div>
     </div>
 
     <div class="row g-4">
+        <!-- MAIN CONTENT -->
         <div class="col-lg-8">
-            <div class="section-surface p-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
-                    <h2 class="h5 fw-bold mb-0">Recent Reports</h2>
-                    <a href="{{ route('reports.create') }}" class="btn btn-sm btn-primary">Submit Report</a>
+            <!-- RECENT REPORTS -->
+            <div class="section-surface p-4 p-lg-5 mb-4 rounded-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <div>
+                        <h2 class="h4 fw-bold mb-1">Your Recent Reports</h2>
+                        <p class="text-secondary small mb-0">Track the status of your submissions</p>
+                    </div>
+                    <a href="{{ route('reports.index') }}" class="btn btn-sm btn-outline-primary">View All</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0">
-                        <thead>
+                        <thead class="table-light">
                             <tr>
-                                <th>Case</th>
-                                <th>Location</th>
-                                <th>Status</th>
+                                <th class="fw-semibold">Case</th>
+                                <th class="fw-semibold">Location</th>
+                                <th class="fw-semibold">Status</th>
+                                <th class="fw-semibold">Date</th>
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @forelse ($reports as $report)
+                            @forelse ($reports->take(5) as $report)
                                 <tr>
-                                    <td>{{ $report->child_name ?: 'Anonymous child' }}</td>
-                                    <td>{{ $report->location }}</td>
-                                    <td><span class="status-pill bg-light text-dark">{{ \App\Models\Report::statuses()[$report->status] ?? ucfirst($report->status) }}</span></td>
+                                    <td class="fw-semibold">{{ $report->child_name ?: '👤 Anonymous' }}</td>
+                                    <td>📍 {{ $report->location }}</td>
+                                    <td>
+                                        @php
+                                            $statusColors = [
+                                                'pending' => 'warning',
+                                                'under_review' => 'info',
+                                                'verified' => 'success',
+                                                'resolved' => 'secondary',
+                                                'rejected' => 'danger'
+                                            ];
+                                            $color = $statusColors[$report->status] ?? 'secondary';
+                                        @endphp
+                                        <span class="status-pill bg-{{ $color }} text-white">{{ \App\Models\Report::statuses()[$report->status] ?? ucfirst(str_replace('_', ' ', $report->status)) }}</span>
+                                    </td>
+                                    <td class="small text-secondary">{{ $report->created_at->format('M d, Y') }}</td>
                                     <td><a href="{{ route('reports.show', $report) }}" class="btn btn-sm btn-outline-primary">View</a></td>
                                 </tr>
                             @empty
-                                <tr><td colspan="4" class="text-center text-secondary py-4">No reports submitted yet.</td></tr>
+                                <tr>
+                                    <td colspan="5" class="text-center text-secondary py-5">
+                                        <div class="mb-2" style="font-size: 2rem;">📭</div>
+                                        <strong>No reports yet</strong><br>
+                                        <small>Start protecting children by submitting your first report</small>
+                                    </td>
+                                </tr>
                             @endforelse
                         </tbody>
                     </table>
                 </div>
             </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="section-surface p-4 mb-4">
-                <h2 class="h5 fw-bold mb-3">Unread Notifications</h2>
+
+            <!-- STATUS OVERVIEW CHART -->
+            <div class="section-surface p-4 p-lg-5 rounded-4">
+                <h2 class="h4 fw-bold mb-4">Report Status Breakdown</h2>
                 <div class="d-grid gap-3">
-                    @forelse ($unreadNotifications as $notification)
-                        <div class="border rounded-4 p-3 bg-white">
-                            <div class="fw-semibold">{{ $notification->title }}</div>
-                            <div class="small text-secondary">{{ $notification->message }}</div>
+                    <div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="fw-semibold">Pending Review</span>
+                            <span class="badge bg-warning">{{ $reportStats['pending'] }}</span>
                         </div>
-                    @empty
-                        <div class="text-secondary">You have no unread notifications.</div>
-                    @endforelse
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-warning" style="width: {{ $reportStats['total'] ? ($reportStats['pending'] / $reportStats['total']) * 100 : 0 }}%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="fw-semibold">Verified Cases</span>
+                            <span class="badge bg-success">{{ $reportStats['verified'] }}</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-success" style="width: {{ $reportStats['total'] ? ($reportStats['verified'] / $reportStats['total']) * 100 : 0 }}%"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span class="fw-semibold">Resolved Cases</span>
+                            <span class="badge bg-info">{{ $reportStats['resolved'] }}</span>
+                        </div>
+                        <div class="progress" style="height: 8px;">
+                            <div class="progress-bar bg-info" style="width: {{ $reportStats['total'] ? ($reportStats['resolved'] / $reportStats['total']) * 100 : 0 }}%"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="section-surface p-4">
-                <h2 class="h5 fw-bold mb-3">Status Overview</h2>
-                <div class="mb-2 small text-secondary">Pending</div>
-                <div class="progress mb-3"><div class="progress-bar bg-warning" style="width: {{ $reportStats['total'] ? ($reportStats['pending'] / $reportStats['total']) * 100 : 0 }}%"></div></div>
-                <div class="mb-2 small text-secondary">Verified</div>
-                <div class="progress mb-3"><div class="progress-bar bg-success" style="width: {{ $reportStats['total'] ? ($reportStats['verified'] / $reportStats['total']) * 100 : 0 }}%"></div></div>
-                <div class="mb-2 small text-secondary">Resolved</div>
-                <div class="progress"><div class="progress-bar bg-info" style="width: {{ $reportStats['total'] ? ($reportStats['resolved'] / $reportStats['total']) * 100 : 0 }}%"></div></div>
+        </div>
+
+        <!-- SIDEBAR -->
+        <div class="col-lg-4">
+            <!-- UNREAD NOTIFICATIONS -->
+            <div class="section-surface p-4 p-lg-5 mb-4 rounded-4">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h2 class="h5 fw-bold mb-0">🔔 Notifications</h2>
+                    @if ($unreadNotifications->count() > 0)
+                        <span class="badge bg-danger">{{ $unreadNotifications->count() }}</span>
+                    @endif
+                </div>
+                <div class="d-grid gap-3">
+                    @forelse ($unreadNotifications->take(4) as $notification)
+                        <div class="border-start border-4 border-warning bg-light rounded-3 p-3">
+                            <div class="fw-semibold small mb-1 text-primary">{{ $notification->title }}</div>
+                            <div class="small text-secondary">{{ Str::limit($notification->message, 60) }}</div>
+                        </div>
+                    @empty
+                        <div class="text-center text-secondary py-4">
+                            <div style="font-size: 2rem;" class="mb-2">✨</div>
+                            <small>All caught up! No new notifications</small>
+                        </div>
+                    @endforelse
+                    @if ($unreadNotifications->count() > 0)
+                        <a href="{{ route('notifications.index') }}" class="btn btn-sm btn-outline-primary w-100">View All Notifications</a>
+                    @endif
+                </div>
+            </div>
+
+            <!-- QUICK LINKS -->
+            <div class="section-surface p-4 p-lg-5 rounded-4">
+                <h2 class="h5 fw-bold mb-4">Quick Links</h2>
+                <div class="d-grid gap-2">
+                    <a href="{{ route('reports.create') }}" class="btn btn-primary d-flex align-items-center gap-2">
+                        <span>📝</span> Submit Report
+                    </a>
+                    <a href="{{ route('reports.index') }}" class="btn btn-outline-primary d-flex align-items-center gap-2">
+                        <span>📋</span> My Reports
+                    </a>
+                    <a href="{{ route('notifications.index') }}" class="btn btn-outline-primary d-flex align-items-center gap-2">
+                        <span>🔔</span> Notifications
+                    </a>
+                    <a href="{{ route('about') }}" class="btn btn-outline-secondary d-flex align-items-center gap-2">
+                        <span>ℹ️</span> Learn More
+                    </a>
+                </div>
             </div>
         </div>
     </div>
-@endsection<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Dashboard') }}
+@endsection
         </h2>
     </x-slot>
 

@@ -7,6 +7,20 @@
     <title>{{ config('app.name', __('childshield.brand')) }}</title>
     <meta name="description" content="{{ __('childshield.tagline') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <style>
+        .accordion {
+            display: block !important;
+            visibility: visible !important;
+        }
+        .accordion-body {
+            display: block !important;
+            visibility: visible !important;
+        }
+        .collapse.show {
+            display: block !important;
+            visibility: visible !important;
+        }
+    </style>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @stack('styles')
 </head>
@@ -35,6 +49,23 @@
     @include('layouts.footer')
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+    <script>
+        // Ensure all Bootstrap components are initialized
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize all tooltips and popovers
+            const tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+            tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl);
+            });
+
+            // Fix accordion display
+            const accordions = document.querySelectorAll('.accordion');
+            accordions.forEach(accordion => {
+                accordion.style.display = 'block';
+                accordion.style.visibility = 'visible';
+            });
+        });
+    </script>
     @stack('scripts')
 </body>
 </html>

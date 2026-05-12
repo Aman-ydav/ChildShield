@@ -1,47 +1,96 @@
-<x-guest-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
+@extends('layouts.master')
 
-    <form method="POST" action="{{ route('login') }}">
-        @csrf
-
-        <!-- Email Address -->
-        <div>
-            <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
-            <x-input-error :messages="$errors->get('email')" class="mt-2" />
-        </div>
-
-        <!-- Password -->
-        <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
-        </div>
-
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded dark:bg-gray-900 border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Remember me') }}</span>
-            </label>
-        </div>
-
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
+@section('content')
+    <div class="row justify-content-center align-items-center" style="min-height: 600px;">
+        <div class="col-md-6 col-lg-5">
+            <!-- BACK LINK -->
+            <div class="mb-4">
+                <a href="{{ route('home') }}" class="btn btn-outline-primary btn-sm">
+                    ← Back to Home
                 </a>
-            @endif
+            </div>
 
-            <x-primary-button class="ms-3">
-                {{ __('Log in') }}
-            </x-primary-button>
+            <div class="section-surface p-5 p-lg-6 rounded-4">
+                <!-- HEADER -->
+                <div class="text-center mb-4">
+                    <h1 class="h3 fw-bold text-primary mb-2">Welcome Back</h1>
+                    <p class="text-secondary">Sign in to access your ChildShield dashboard</p>
+                </div>
+
+                <!-- SESSION STATUS -->
+                @if (session('status'))
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        {{ session('status') }}
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+                    </div>
+                @endif
+
+                <!-- LOGIN FORM -->
+                <form method="POST" action="{{ route('login') }}" class="needs-validation">
+                    @csrf
+
+                    <!-- Email Address -->
+                    <div class="mb-3">
+                        <label for="email" class="form-label fw-semibold">Email Address</label>
+                        <input type="email" class="form-control @error('email') is-invalid @enderror" id="email" name="email" value="{{ old('email') }}" required autofocus autocomplete="username" placeholder="you@example.com">
+                        @error('email')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <!-- Password -->
+                    <div class="mb-3">
+                        <label for="password" class="form-label fw-semibold">Password</label>
+                        <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password" required autocomplete="current-password" placeholder="Enter your password">
+                        @error('password')
+                            <div class="invalid-feedback d-block">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <!-- Remember Me -->
+                    <div class="form-check mb-4">
+                        <input class="form-check-input" type="checkbox" id="remember" name="remember">
+                        <label class="form-check-label" for="remember">
+                            Remember me for 30 days
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn btn-primary btn-lg w-100 fw-semibold mb-3">Sign In</button>
+
+                    <!-- DIVIDER -->
+                    <div class="position-relative mb-3">
+                        <div class="border-bottom"></div>
+                    </div>
+
+                    <!-- FORGOT PASSWORD / SIGNUP LINKS -->
+                    <div class="d-grid gap-2">
+                        @if (Route::has('password.request'))
+                            <a href="{{ route('password.request') }}" class="btn btn-outline-secondary btn-sm">
+                                Forgot your password?
+                            </a>
+                        @endif
+                    </div>
+                </form>
+
+                <!-- FOOTER -->
+                <div class="text-center mt-4 pt-3 border-top">
+                    <p class="text-secondary small mb-0">
+                        Don't have an account?
+                        <a href="{{ route('register') }}" class="fw-semibold text-warning text-decoration-none">Sign up here</a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- INFO BOX -->
+            <div class="mt-4 p-3 bg-light rounded-3 text-center">
+                <small class="text-secondary">
+                    <strong>Demo Account:</strong><br>
+                    Email: admin@childshield.test<br>
+                    Password: admin@123
+                </small>
+            </div>
         </div>
-    </form>
-</x-guest-layout>
+    </div>
+@endsection
+

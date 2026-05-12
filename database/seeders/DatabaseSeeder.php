@@ -27,7 +27,7 @@ class DatabaseSeeder extends Seeder
             ['email' => 'admin@childshield.test'],
             [
                 'name' => 'ChildShield Admin',
-                'password' => bcrypt('password'),
+                'password' => bcrypt('admin@123'),
                 'role' => 'admin',
             ]
         );
