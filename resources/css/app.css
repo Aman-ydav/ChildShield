@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+	--childshield-blue: #12315b;
+	--childshield-blue-2: #0a2340;
+	--childshield-cream: #f5f7fb;
+	--childshield-accent: #ff6b00;
+	--childshield-danger: #c92a2a;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body.childshield-body {
+	background: linear-gradient(180deg, #f8fbff 0%, #eef4fb 100%);
+	color: #0f172a;
+}
+
+.childshield-navbar {
+	background: linear-gradient(90deg, var(--childshield-blue-2), var(--childshield-blue));
+}
+
+.childshield-main {
+	min-height: calc(100vh - 140px);
+}
+
+.childshield-footer {
+	background: #ffffff;
+	border-top: 1px solid rgba(18, 49, 91, 0.08);
+}
+
+.hero-panel {
+	background: radial-gradient(circle at top left, rgba(255, 107, 0, 0.16), transparent 32%),
+		linear-gradient(135deg, #12315b 0%, #0a2340 100%);
+	color: #ffffff;
+	border-radius: 1.5rem;
+	overflow: hidden;
+}
+
+.section-surface {
+	background: rgba(255, 255, 255, 0.86);
+	border: 1px solid rgba(18, 49, 91, 0.08);
+	border-radius: 1.25rem;
+	box-shadow: 0 16px 40px rgba(18, 49, 91, 0.08);
+}
+
+.status-pill {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
+	border-radius: 999px;
+	padding: 0.35rem 0.75rem;
+	font-size: 0.82rem;
+	font-weight: 700;
+}
+
+.letter-spacing {
+	letter-spacing: 0.04em;
+}
+
+.stat-card {
+	border: 0;
+	border-radius: 1rem;
+	box-shadow: 0 10px 24px rgba(18, 49, 91, 0.08);
+}
+
+.report-table thead th {
+	background: #eaf1fb;
+	color: var(--childshield-blue);
+	font-size: 0.85rem;
+	text-transform: uppercase;
+	letter-spacing: 0.04em;
+}
