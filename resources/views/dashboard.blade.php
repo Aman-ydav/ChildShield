@@ -207,16 +207,16 @@
             <div class="section-surface p-4 p-lg-5">
                 <h2 class="h5 fw-bold mb-4">Quick Links</h2>
                 <div class="d-grid gap-2">
-                    <a href="{{ route('reports.create') }}" class="bauhaus-btn bauhaus-btn--red d-flex align-items-center gap-2">
+                    <a href="{{ route('reports.create') }}" class="bauhaus-btn bauhaus-btn--red d-flex align-items-center gap-2.5 mb-1">
                         <span>📝</span> Submit Report
                     </a>
-                    <a href="{{ route('reports.index') }}" class="bauhaus-btn bauhaus-btn--outline d-flex align-items-center gap-2">
+                    <a href="{{ route('reports.index') }}" class="bauhaus-btn bauhaus-btn--yellow d-flex align-items-center gap-2.5 mb-1">
                         <span>📋</span> My Reports
                     </a>
-                    <a href="{{ route('notifications.index') }}" class="bauhaus-btn bauhaus-btn--outline d-flex align-items-center gap-2">
+                    <a href="{{ route('notifications.index') }}" class="bauhaus-btn bauhaus-btn--blue d-flex align-items-center gap-2.5 mb-1">
                         <span>🔔</span> Notifications
                     </a>
-                    <a href="{{ route('about') }}" class="bauhaus-btn bauhaus-btn--outline d-flex align-items-center gap-2">
+                    <a href="{{ route('about') }}" class="bauhaus-btn bauhaus-btn--outline d-flex align-items-center gap-2.5 mb-1">
                         <span>ℹ️</span> Learn More
                     </a>
                 </div>

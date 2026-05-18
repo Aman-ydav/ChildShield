@@ -99,6 +99,46 @@
                 </div>
             </section>
 
+            <!-- QUICK LINKS -->
+            <section class="py-12">
+                <h3 class="bauhaus-subhead text-xl mb-4">Quick Links</h3>
+                <p class="text-sm text-[#444] mb-6">Fast access to common actions and resources — clear labels and concise descriptions.</p>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+                    <a href="{{ route('register') }}" class="bauhaus-card p-4 text-center hover:shadow-lg">
+                        <div class="text-3xl mb-2" aria-hidden="true">📝</div>
+                        <div class="fw-bold mb-1">Start Reporting</div>
+                        <div class="text-sm text-secondary">Create an account and submit reports quickly.</div>
+                    </a>
+
+                    <a href="{{ route('about') }}" class="bauhaus-card p-4 text-center hover:shadow-lg">
+                        <div class="text-3xl mb-2" aria-hidden="true">ℹ️</div>
+                        <div class="fw-bold mb-1">About</div>
+                        <div class="text-sm text-secondary">Learn more about ChildShield and partners.</div>
+                    </a>
+
+                    <a href="{{ route('contact') }}" class="bauhaus-card p-4 text-center hover:shadow-lg">
+                        <div class="text-3xl mb-2" aria-hidden="true">✉️</div>
+                        <div class="fw-bold mb-1">Contact</div>
+                        <div class="text-sm text-secondary">Get help, deployment support, or training.</div>
+                    </a>
+
+                    @auth
+                        <a href="{{ route('dashboard') }}" class="bauhaus-card p-4 text-center hover:shadow-lg">
+                            <div class="text-3xl mb-2" aria-hidden="true">📊</div>
+                            <div class="fw-bold mb-1">Dashboard</div>
+                            <div class="text-sm text-secondary">View your reports and notifications.</div>
+                        </a>
+                    @else
+                        <a href="{{ route('login') }}" class="bauhaus-card p-4 text-center hover:shadow-lg">
+                            <div class="text-3xl mb-2" aria-hidden="true">🔐</div>
+                            <div class="fw-bold mb-1">Login</div>
+                            <div class="text-sm text-secondary">Access your account or team dashboard.</div>
+                        </a>
+                    @endauth
+                </div>
+            </section>
+
             <!-- FAQ accordion -->
             <section class="py-12" id="faq">
                 <h3 class="bauhaus-subhead text-xl mb-6">Frequently Asked Questions</h3>
