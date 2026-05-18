@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="section-surface p-4 p-lg-5 mb-4">
+    <div class="section-surface p-4 p-lg-5 mb-2">
         <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
             <div>
                 <h1 class="bauhaus-uppercase text-3xl mb-2">Dashboard</h1>
@@ -22,7 +22,7 @@
     </div>
 
     <!-- WELCOME SECTION -->
-    <div class="section-surface p-4 p-lg-5 mb-5 bg-gradient" style="background: linear-gradient(135deg, rgba(18, 49, 91, 0.08) 0%, rgba(255, 107, 0, 0.04) 100%);">
+    <div class="section-surface p-4 my-6 p-lg-5 mb-5 bg-gradient" style="background: linear-gradient(135deg, rgba(18, 49, 91, 0.08) 0%, rgba(255, 107, 0, 0.04) 100%);">
         <div class="row align-items-center">
             <div class="col-lg-8">
                 <h1 class="display-5 fw-bold mb-2">Welcome back, {{ auth()->user()->name }}! 👋</h1>
@@ -124,7 +124,7 @@
                                         <span class="status-pill bg-{{ $color }} text-white">{{ \App\Models\Report::statuses()[$report->status] ?? ucfirst(str_replace('_', ' ', $report->status)) }}</span>
                                     </td>
                                     <td class="small text-secondary">{{ $report->created_at->format('M d, Y') }}</td>
-                                    <td><a href="{{ route('reports.show', $report) }}" class="btn btn-sm btn-outline-primary">View</a></td>
+                                    <td><a href="{{ route('reports.show', $report) }}" class="bauhaus-btn bauhaus-btn--outline btn-sm">View</a></td>
                                 </tr>
                             @empty
                                 <tr>
@@ -187,7 +187,7 @@
                 </div>
                 <div class="d-grid gap-3">
                     @forelse ($unreadNotifications->take(4) as $notification)
-                        <div class="border-start border-4 border-warning bg-light rounded-3 p-3">
+                        <div class="bauhaus-card p-3">
                             <div class="fw-semibold small mb-1 text-primary">{{ $notification->title }}</div>
                             <div class="small text-secondary">{{ Str::limit($notification->message, 60) }}</div>
                         </div>

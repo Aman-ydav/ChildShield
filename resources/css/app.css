@@ -133,14 +133,15 @@ body.childshield-body { margin: 0; }
 	/* offset content to account for fixed navbar height */
 	padding-top: 80px; /* matches navbar height (72) plus small gap */
 	flex: 1 1 auto;
+	overflow-x: clip;
 }
 
 .childshield-shell {
 	width: 100%;
-	max-width: 92rem;
+	max-width: 88rem;
 	margin: 0 auto;
-	padding-left: clamp(1.25rem, 3vw, 2.5rem);
-	padding-right: clamp(1.25rem, 3vw, 2.5rem);
+	padding-left: clamp(1.5rem, 3.5vw, 3rem);
+	padding-right: clamp(1.5rem, 3.5vw, 3rem);
 }
 
 .childshield-footer {

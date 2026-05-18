@@ -32,7 +32,7 @@
     @include('layouts.navbar')
 
     <main class="childshield-main">
-        <div class="py-4 py-lg-5">
+        <div class="w-full max-w-7xl mx-auto py-5 px-1 py-lg-4">
             @if (session('status'))
                 <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
                     {{ session('status') }}
