@@ -26,7 +26,6 @@
                         <li class="nav-item"><a class="nav-link {{ request()->routeIs('reports.*') ? 'active' : '' }}" href="{{ route('reports.index') }}">Reports</a></li>
                     @endif
                     <li class="nav-item"><a class="nav-link {{ request()->routeIs('notifications.*') ? 'active' : '' }}" href="{{ route('notifications.index') }}">Notifications</a></li>
-                    @endif
                 @endauth
             </ul>
             <div class="d-flex gap-2 ms-lg-3 mt-3 mt-lg-0">
