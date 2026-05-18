@@ -1,6 +1,19 @@
 @extends('layouts.master')
 
 @section('content')
+    <div class="section-surface p-4 p-lg-5 mb-4">
+        <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
+            <div>
+                <h1 class="bauhaus-uppercase text-3xl mb-1">Report Details</h1>
+                <p class="text-secondary mb-0">Case reference #{{ $report->id }} • Submitted {{ $report->created_at->format('d M Y \a\t H:i') }}</p>
+            </div>
+            <div class="d-flex flex-wrap gap-2">
+                <a href="{{ route('reports.edit', $report) }}" class="bauhaus-btn bauhaus-btn--outline">Edit</a>
+                <a href="{{ route('reports.index') }}" class="bauhaus-btn bauhaus-btn--outline">Back</a>
+            </div>
+        </div>
+    </div>
+
     <!-- BREADCRUMB -->
     <div class="mb-4">
         <nav aria-label="breadcrumb">
@@ -13,28 +26,11 @@
         </nav>
     </div>
 
-    <div class="section-surface p-4 p-lg-5 rounded-4">
-        <!-- HEADER -->
-        <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-start gap-3 mb-4">
-            <div>
-                <h1 class="display-5 fw-bold mb-1">Report Details</h1>
-                <p class="text-secondary mb-0">Case reference #{{ $report->id }} • Submitted {{ $report->created_at->format('d M Y \a\t H:i') }}</p>
-            </div>
-            <div class="d-flex gap-2 flex-wrap">
-                <a href="{{ route('reports.edit', $report) }}" class="btn btn-outline-primary">✏️ Edit</a>
-                <form method="POST" action="{{ route('reports.destroy', $report) }}" onsubmit="return confirm('Delete this report?');" style="display: inline;">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-outline-danger">🗑️ Delete</button>
-                </form>
-                <a href="{{ route('reports.index') }}" class="btn btn-outline-secondary">← Back</a>
-            </div>
-        </div>
-
+    <div class="section-surface p-4 p-lg-5">
         <!-- REPORT INFO -->
         <div class="row g-4">
             <div class="col-lg-8">
-                <div class="bg-white rounded-4 border p-4 h-100">
+                <div class="bauhaus-card p-4 h-100">
                     <h2 class="h5 fw-bold mb-4 text-primary">Case Information</h2>
                     <div class="row g-3">
                         <div class="col-md-6">
@@ -87,7 +83,7 @@
 
             <!-- PROOF SECTION -->
             <div class="col-lg-4">
-                <div class="bg-light rounded-4 p-4 h-100">
+                <div class="bauhaus-card p-4 h-100">
                     <h2 class="h5 fw-bold mb-3 text-primary">📸 Uploaded Proof</h2>
                     @if ($report->image)
                         <img src="{{ asset('storage/'.$report->image) }}" alt="Uploaded proof" class="img-fluid rounded-4 border mb-3" style="max-height: 300px; object-fit: cover; width: 100%;">

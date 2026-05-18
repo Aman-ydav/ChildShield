@@ -4,10 +4,10 @@
     <div class="section-surface p-4 p-lg-5 mb-4">
         <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 align-items-lg-center mb-4">
             <div>
-                <h1 class="fw-bold mb-1">Admin Dashboard</h1>
+                <h1 class="bauhaus-uppercase text-3xl mb-1">Admin Dashboard</h1>
                 <p class="text-secondary mb-0">Monitor and manage all ChildShield cases from one control panel.</p>
             </div>
-            <a href="{{ route('admin.reports.index') }}" class="btn btn-primary px-4">Manage Reports</a>
+            <a href="{{ route('admin.reports.index') }}" class="bauhaus-btn bauhaus-btn--red">Manage Reports</a>
         </div>
 
         <div class="row g-3 mb-4">
@@ -21,20 +21,20 @@
 
         <div class="row g-4">
             <div class="col-lg-7">
-                <div class="bg-white border rounded-4 p-4">
+                <div class="bauhaus-card p-4">
                     <h2 class="h5 fw-bold mb-3">Monthly Reports</h2>
                     <canvas id="monthlyReportsChart" height="120"></canvas>
                 </div>
             </div>
             <div class="col-lg-5">
-                <div class="bg-white border rounded-4 p-4 h-100">
+                <div class="bauhaus-card p-4 h-100">
                     <h2 class="h5 fw-bold mb-3">Recent Cases</h2>
                     <div class="d-grid gap-3">
                         @foreach ($reports as $report)
                             <div class="border rounded-4 p-3">
                                 <div class="d-flex justify-content-between gap-2">
                                     <strong>{{ $report->child_name ?: 'Anonymous child' }}</strong>
-                                    <span class="badge text-bg-light border">{{ \App\Models\Report::statuses()[$report->status] ?? ucfirst($report->status) }}</span>
+                                    <span class="status-pill bg-light text-dark">{{ \App\Models\Report::statuses()[$report->status] ?? ucfirst($report->status) }}</span>
                                 </div>
                                 <div class="small text-secondary">{{ $report->location }}</div>
                             </div>

@@ -1,18 +1,20 @@
 @extends('layouts.master')
 
 @section('content')
-    <div class="section-surface p-4 p-lg-5">
-        <div class="d-flex flex-column flex-lg-row justify-content-between gap-3 mb-4">
+    <div class="section-surface p-4 p-lg-5 mb-4">
+        <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
             <div>
-                <h1 class="fw-bold mb-1">Case Review</h1>
+                <h1 class="bauhaus-uppercase text-3xl mb-1">Case Review</h1>
                 <p class="text-secondary mb-0">Report #{{ $report->id }}</p>
             </div>
-            <a href="{{ route('admin.reports.index') }}" class="btn btn-outline-secondary">Back</a>
+            <a href="{{ route('admin.reports.index') }}" class="bauhaus-btn bauhaus-btn--outline">Back</a>
         </div>
+    </div>
 
+    <div class="section-surface p-4 p-lg-5">
         <div class="row g-4">
             <div class="col-lg-7">
-                <div class="bg-white border rounded-4 p-4 h-100">
+                <div class="bauhaus-card p-4 h-100">
                     <div class="row g-3">
                         <div class="col-md-6"><strong>Reporter:</strong> {{ $report->user?->name }}</div>
                         <div class="col-md-6"><strong>Contact:</strong> {{ $report->reporter_contact }}</div>
@@ -28,7 +30,7 @@
                 </div>
             </div>
             <div class="col-lg-5">
-                <div class="bg-light rounded-4 p-4 mb-4">
+                <div class="bauhaus-card p-4 mb-4">
                     <strong class="d-block mb-2">Uploaded Image</strong>
                     @if ($report->image)
                         <img src="{{ asset('storage/'.$report->image) }}" alt="Proof" class="img-fluid rounded-4 border">
@@ -37,18 +39,18 @@
                     @endif
                 </div>
 
-                <div class="bg-white border rounded-4 p-4">
+                <div class="bauhaus-card p-4">
                     <h2 class="h6 fw-bold mb-3">Update Status</h2>
                     <form method="POST" action="{{ route('admin.reports.status', $report) }}" class="d-grid gap-3">
                         @csrf
                         @method('PATCH')
-                        <select name="status" class="form-select" required>
+                        <select name="status" class="bauhaus-select" required>
                             @foreach (\App\Models\Report::statuses() as $value => $label)
                                 <option value="{{ $value }}" @selected($report->status === $value)>{{ $label }}</option>
                             @endforeach
                         </select>
-                        <textarea name="admin_remark" rows="4" class="form-control" placeholder="Optional admin remark">{{ old('admin_remark', $report->admin_remark) }}</textarea>
-                        <button type="submit" class="btn btn-primary">Save Status</button>
+                        <textarea name="admin_remark" rows="4" class="bauhaus-textarea" placeholder="Optional admin remark">{{ old('admin_remark', $report->admin_remark) }}</textarea>
+                        <button type="submit" class="bauhaus-btn bauhaus-btn--red">Save Status</button>
                     </form>
                 </div>
             </div>

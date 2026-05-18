@@ -1,29 +1,25 @@
 <x-app-layout>
     <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 dark:text-gray-200 leading-tight">
-            {{ __('Profile') }}
-        </h2>
+        <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
+            <div>
+                <h2 class="bauhaus-uppercase text-3xl mb-1">Profile</h2>
+                <p class="text-secondary mb-0">Update account details, password, and privacy settings.</p>
+            </div>
+            <a href="{{ route('dashboard') }}" class="bauhaus-btn bauhaus-btn--outline">Back to Dashboard</a>
+        </div>
     </x-slot>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6">
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-profile-information-form')
-                </div>
-            </div>
+    <div class="grid grid-cols-1 gap-6">
+        <div class="bauhaus-card p-5 p-lg-6">
+            @include('profile.partials.update-profile-information-form')
+        </div>
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.update-password-form')
-                </div>
-            </div>
+        <div class="bauhaus-card p-5 p-lg-6">
+            @include('profile.partials.update-password-form')
+        </div>
 
-            <div class="p-4 sm:p-8 bg-white dark:bg-gray-800 shadow sm:rounded-lg">
-                <div class="max-w-xl">
-                    @include('profile.partials.delete-user-form')
-                </div>
-            </div>
+        <div class="bauhaus-card p-5 p-lg-6">
+            @include('profile.partials.delete-user-form')
         </div>
     </div>
 </x-app-layout>

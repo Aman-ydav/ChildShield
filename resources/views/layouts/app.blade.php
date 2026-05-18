@@ -5,7 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
-        <title>{{ config('app.name', 'Laravel') }}</title>
+        <title>{{ config('app.name', __('childshield.brand')) }}</title>
+        <meta name="description" content="{{ __('childshield.tagline') }}">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
 
         <!-- Fonts: Outfit (Bauhaus) -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,23 +18,23 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="font-sans antialiased">
-        <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
-            @include('layouts.navigation')
+    <body class="childshield-body">
+        @include('layouts.navbar')
 
-            <!-- Page Heading -->
-            @isset($header)
-                <header class="bg-white dark:bg-gray-800 shadow">
-                    <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
+        <main class="childshield-main">
+            <div class="childshield-shell py-10">
+                @isset($header)
+                    <div class="section-surface p-4 p-lg-5 mb-4">
                         {{ $header }}
                     </div>
-                </header>
-            @endisset
+                @endisset
 
-            <!-- Page Content -->
-            <main>
                 {{ $slot }}
-            </main>
-        </div>
+            </div>
+        </main>
+
+        @include('layouts.footer')
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
     </body>
 </html>

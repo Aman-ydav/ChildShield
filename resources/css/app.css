@@ -24,6 +24,17 @@ body.childshield-body {
 	font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
+/* Layout: make body a column flex so footer sits correctly */
+body.childshield-body{
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	overflow-x: hidden;
+}
+
+/* remove default body margin that can cause extra space under footer */
+body.childshield-body { margin: 0; }
+
 /* NAVBAR STYLES */
 .childshield-navbar {
 	background: linear-gradient(90deg, var(--childshield-blue-2), var(--childshield-blue));
@@ -36,6 +47,9 @@ body.childshield-body {
 	display: block !important;
 	visibility: visible !important;
 }
+
+/* explicit navbar height used to offset main content */
+.childshield-navbar{height:72px}
 
 .navbar-brand {
 	color: white !important;
@@ -117,8 +131,16 @@ body.childshield-body {
 
 .childshield-main {
 	/* offset content to account for fixed navbar height */
-	padding-top: 84px;
-	min-height: calc(100vh - 140px);
+	padding-top: 80px; /* matches navbar height (72) plus small gap */
+	flex: 1 1 auto;
+}
+
+.childshield-shell {
+	width: 100%;
+	max-width: 92rem;
+	margin: 0 auto;
+	padding-left: clamp(1.25rem, 3vw, 2.5rem);
+	padding-right: clamp(1.25rem, 3vw, 2.5rem);
 }
 
 .childshield-footer {
@@ -139,7 +161,6 @@ body.childshield-body {
 /* SECTION SURFACE */
 .section-surface {
 	background: rgba(255, 255, 255, 0.95);
-	border: 1px solid rgba(18, 49, 91, 0.08);
 	border-radius: 1.25rem;
 	box-shadow: 0 10px 30px rgba(18, 49, 91, 0.08);
 	transition: all 0.3s ease;
@@ -148,6 +169,10 @@ body.childshield-body {
 .section-surface:hover {
 	box-shadow: 0 15px 40px rgba(18, 49, 91, 0.12);
 	transform: translateY(-2px);
+}
+
+.childshield-main .row {
+	--bs-gutter-x: 1.5rem;
 }
 
 /* STATUS PILL */
@@ -169,7 +194,6 @@ body.childshield-body {
 }
 
 .stat-card {
-	border: 0;
 	border-radius: 1rem;
 	box-shadow: 0 10px 24px rgba(18, 49, 91, 0.08);
 	transition: all 0.3s ease;
@@ -501,10 +525,17 @@ body.childshield-body {
 .bauhaus-btn--red{background:var(--bauhaus-red);color:white;box-shadow:4px 4px 0 0 var(--bauhaus-border)}
 .bauhaus-btn--blue{background:var(--bauhaus-blue);color:white;box-shadow:4px 4px 0 0 var(--bauhaus-border)}
 .bauhaus-btn--yellow{background:var(--bauhaus-yellow);color:var(--bauhaus-foreground);box-shadow:4px 4px 0 0 var(--bauhaus-border)}
+.bauhaus-btn--outline{background:transparent;color:var(--bauhaus-foreground);box-shadow:4px 4px 0 0 var(--bauhaus-border);border-style:solid}
 .bauhaus-btn:active{transform:translate(2px,2px);box-shadow:none}
 
 /* Card */
-.bauhaus-card{background:white;border:4px solid var(--bauhaus-border);box-shadow:8px 8px 0 0 var(--bauhaus-border);padding:1.25rem;border-radius:0}
+.bauhaus-card{background:white;box-shadow:8px 8px 0 0 rgba(18,49,91,.14);padding:1.25rem;border-radius:1.1rem}
+
+/* Bauhaus forms */
+.bauhaus-input,.bauhaus-textarea,.bauhaus-select{width:100%;border:2px solid var(--bauhaus-border);background:#fff;padding:.8rem 1rem;font-family:'Outfit',sans-serif;box-shadow:4px 4px 0 0 var(--bauhaus-border);transition:transform .15s ease, box-shadow .15s ease, border-color .15s ease}
+.bauhaus-input:focus,.bauhaus-textarea:focus,.bauhaus-select:focus{outline:none;border-color:var(--bauhaus-red);box-shadow:6px 6px 0 0 var(--bauhaus-border)}
+.bauhaus-input::placeholder,.bauhaus-textarea::placeholder{color:#777}
+.bauhaus-select{appearance:none;background-image:linear-gradient(45deg, transparent 50%, var(--bauhaus-border) 50%),linear-gradient(135deg, var(--bauhaus-border) 50%, transparent 50%);background-position:calc(100% - 22px) calc(1em + 2px),calc(100% - 16px) calc(1em + 2px);background-size:6px 6px,6px 6px;background-repeat:no-repeat;padding-right:2.5rem}
 
 /* Utility hard shadows */
 .shadow-bauhaus-sm{box-shadow:3px 3px 0 0 var(--bauhaus-border)!important}

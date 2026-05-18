@@ -1,6 +1,16 @@
 @extends('layouts.master')
 
 @section('content')
+    <div class="section-surface p-4 p-lg-5 mb-4">
+        <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
+            <div>
+                <h1 class="bauhaus-uppercase text-3xl mb-1">My Reports</h1>
+                <p class="text-secondary mb-0">Track the cases you have submitted and manage updates.</p>
+            </div>
+            <a href="{{ route('reports.create') }}" class="bauhaus-btn bauhaus-btn--red">+ New Report</a>
+        </div>
+    </div>
+
     <!-- BREADCRUMB -->
     <div class="mb-4">
         <nav aria-label="breadcrumb">
@@ -12,16 +22,7 @@
         </nav>
     </div>
 
-    <div class="section-surface p-4 p-lg-5 rounded-4">
-        <!-- HEADER -->
-        <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3 mb-4">
-            <div>
-                <h1 class="display-5 fw-bold mb-1">My Reports</h1>
-                <p class="text-secondary mb-0">Track the cases you have submitted and manage updates.</p>
-            </div>
-            <a href="{{ route('reports.create') }}" class="btn btn-primary btn-lg px-4 fw-semibold">+ New Report</a>
-        </div>
-
+    <div class="section-surface p-4 p-lg-5">
         <!-- REPORTS TABLE -->
         <div class="table-responsive">
             <table class="table report-table table-hover align-middle">
@@ -56,7 +57,7 @@
                             </td>
                             <td class="small text-secondary">{{ $report->created_at->format('d M Y') }}</td>
                             <td class="text-end">
-                                <a href="{{ route('reports.show', $report) }}" class="btn btn-sm btn-outline-primary">View</a>
+                                <a href="{{ route('reports.show', $report) }}" class="bauhaus-btn bauhaus-btn--outline btn-sm">View</a>
                             </td>
                         </tr>
                     @empty

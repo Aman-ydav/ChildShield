@@ -86,17 +86,7 @@
 
         <!-- FAQ (single accordion) -->
 
-        <!-- CTA -->
-            <section class="py-16 text-center bg-[var(--bauhaus-bg)]">
-                <div class="max-w-3xl mx-auto p-10 bg-white border-4 border-[var(--bauhaus-border)]">
-                    <h3 class="bauhaus-uppercase text-3xl mb-4">Join the network</h3>
-                    <p class="mb-6">Help us protect children by reporting incidents quickly and safely. Partner with us to expand reach and support.</p>
-                    <div class="flex justify-center gap-4">
-                        <a href="{{ route('register') }}" class="bauhaus-btn bauhaus-btn--red">Get Started</a>
-                        <a href="{{ route('contact') }}" class="bauhaus-btn bauhaus-btn--outline">Contact Us</a>
-                    </div>
-                </div>
-            </section>
+        <!-- CTA removed here and moved below FAQ -->
 
             <!-- PARTNERS -->
             <section class="py-12">
@@ -142,5 +132,17 @@
                             </div>
                         </div>
                     @endforeach
+                </div>
+            </section>
+
+            <!-- CTA (moved below FAQ) -->
+            <section class="py-16 text-center bg-[var(--bauhaus-bg)]">
+                <div class="max-w-3xl mx-auto p-10 bg-white border-4 border-[var(--bauhaus-border)]">
+                    <h3 class="bauhaus-uppercase text-3xl mb-4">Join the network</h3>
+                    <p class="mb-6">Help us protect children by reporting incidents quickly and safely. Partner with us to expand reach and support.</p>
+                    <div class="flex justify-center gap-4">
+                        <a href="{{ route('register') }}" class="bauhaus-btn bauhaus-btn--red">Get Started</a>
+                        <a href="{{ route('contact') }}" class="bauhaus-btn bauhaus-btn--outline">Contact Us</a>
+                    </div>
                 </div>
             </section>

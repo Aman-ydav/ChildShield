@@ -1,6 +1,16 @@
 @extends('layouts.master')
 
 @section('content')
+    <div class="section-surface p-4 p-lg-5 mb-4">
+        <div class="d-flex flex-column flex-lg-row justify-content-between align-items-lg-center gap-3">
+            <div>
+                <h1 class="bauhaus-uppercase text-3xl mb-2">Dashboard</h1>
+                <p class="text-secondary mb-0">Overview of your reporting activity and response progress.</p>
+            </div>
+            <a href="{{ route('reports.create') }}" class="bauhaus-btn bauhaus-btn--red">+ Submit New Report</a>
+        </div>
+    </div>
+
     <!-- BREADCRUMB -->
     <div class="mb-4">
         <nav aria-label="breadcrumb">
@@ -12,14 +22,14 @@
     </div>
 
     <!-- WELCOME SECTION -->
-    <div class="section-surface p-4 p-lg-5 mb-5 rounded-4 bg-gradient" style="background: linear-gradient(135deg, rgba(18, 49, 91, 0.08) 0%, rgba(255, 107, 0, 0.04) 100%);">
+    <div class="section-surface p-4 p-lg-5 mb-5 bg-gradient" style="background: linear-gradient(135deg, rgba(18, 49, 91, 0.08) 0%, rgba(255, 107, 0, 0.04) 100%);">
         <div class="row align-items-center">
             <div class="col-lg-8">
                 <h1 class="display-5 fw-bold mb-2">Welcome back, {{ auth()->user()->name }}! 👋</h1>
                 <p class="lead text-secondary mb-0">Here's a summary of your reporting activity and impact</p>
             </div>
             <div class="col-lg-4 text-lg-end mt-3 mt-lg-0">
-                <a href="{{ route('reports.create') }}" class="btn btn-warning btn-lg px-4 fw-semibold">+ Submit New Report</a>
+                <a href="{{ route('reports.create') }}" class="bauhaus-btn bauhaus-btn--yellow">+ Submit New Report</a>
             </div>
         </div>
     </div>
@@ -27,7 +37,7 @@
     <!-- STATS CARDS -->
     <div class="row g-4 mb-5">
         <div class="col-md-3">
-            <div class="section-surface p-4 h-100 border-top border-5 border-warning">
+            <div class="section-surface p-4 h-100">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <div class="text-secondary small text-uppercase fw-semibold">My Reports</div>
@@ -38,7 +48,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="section-surface p-4 h-100 border-top border-5 border-warning">
+            <div class="section-surface p-4 h-100">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <div class="text-secondary small text-uppercase fw-semibold">Pending</div>
@@ -49,7 +59,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="section-surface p-4 h-100 border-top border-5 border-success">
+            <div class="section-surface p-4 h-100">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <div class="text-secondary small text-uppercase fw-semibold">Verified</div>
@@ -60,7 +70,7 @@
             </div>
         </div>
         <div class="col-md-3">
-            <div class="section-surface p-4 h-100 border-top border-5 border-info">
+            <div class="section-surface p-4 h-100">
                 <div class="d-flex align-items-center justify-content-between">
                     <div>
                         <div class="text-secondary small text-uppercase fw-semibold">Resolved</div>
@@ -76,13 +86,13 @@
         <!-- MAIN CONTENT -->
         <div class="col-lg-8">
             <!-- RECENT REPORTS -->
-            <div class="section-surface p-4 p-lg-5 mb-4 rounded-4">
+            <div class="section-surface p-4 p-lg-5 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <div>
                         <h2 class="h4 fw-bold mb-1">Your Recent Reports</h2>
                         <p class="text-secondary small mb-0">Track the status of your submissions</p>
                     </div>
-                    <a href="{{ route('reports.index') }}" class="btn btn-sm btn-outline-primary">View All</a>
+                    <a href="{{ route('reports.index') }}" class="bauhaus-btn bauhaus-btn--outline btn-sm">View All</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table table-hover align-middle mb-0">
@@ -131,7 +141,7 @@
             </div>
 
             <!-- STATUS OVERVIEW CHART -->
-            <div class="section-surface p-4 p-lg-5 rounded-4">
+            <div class="section-surface p-4 p-lg-5">
                 <h2 class="h4 fw-bold mb-4">Report Status Breakdown</h2>
                 <div class="d-grid gap-3">
                     <div>
@@ -168,7 +178,7 @@
         <!-- SIDEBAR -->
         <div class="col-lg-4">
             <!-- UNREAD NOTIFICATIONS -->
-            <div class="section-surface p-4 p-lg-5 mb-4 rounded-4">
+            <div class="section-surface p-4 p-lg-5 mb-4">
                 <div class="d-flex justify-content-between align-items-center mb-4">
                     <h2 class="h5 fw-bold mb-0">🔔 Notifications</h2>
                     @if ($unreadNotifications->count() > 0)
@@ -188,25 +198,25 @@
                         </div>
                     @endforelse
                     @if ($unreadNotifications->count() > 0)
-                        <a href="{{ route('notifications.index') }}" class="btn btn-sm btn-outline-primary w-100">View All Notifications</a>
+                        <a href="{{ route('notifications.index') }}" class="bauhaus-btn bauhaus-btn--outline btn-sm w-100">View All Notifications</a>
                     @endif
                 </div>
             </div>
 
             <!-- QUICK LINKS -->
-            <div class="section-surface p-4 p-lg-5 rounded-4">
+            <div class="section-surface p-4 p-lg-5">
                 <h2 class="h5 fw-bold mb-4">Quick Links</h2>
                 <div class="d-grid gap-2">
-                    <a href="{{ route('reports.create') }}" class="btn btn-primary d-flex align-items-center gap-2">
+                    <a href="{{ route('reports.create') }}" class="bauhaus-btn bauhaus-btn--red d-flex align-items-center gap-2">
                         <span>📝</span> Submit Report
                     </a>
-                    <a href="{{ route('reports.index') }}" class="btn btn-outline-primary d-flex align-items-center gap-2">
+                    <a href="{{ route('reports.index') }}" class="bauhaus-btn bauhaus-btn--outline d-flex align-items-center gap-2">
                         <span>📋</span> My Reports
                     </a>
-                    <a href="{{ route('notifications.index') }}" class="btn btn-outline-primary d-flex align-items-center gap-2">
+                    <a href="{{ route('notifications.index') }}" class="bauhaus-btn bauhaus-btn--outline d-flex align-items-center gap-2">
                         <span>🔔</span> Notifications
                     </a>
-                    <a href="{{ route('about') }}" class="btn btn-outline-secondary d-flex align-items-center gap-2">
+                    <a href="{{ route('about') }}" class="bauhaus-btn bauhaus-btn--outline d-flex align-items-center gap-2">
                         <span>ℹ️</span> Learn More
                     </a>
                 </div>
