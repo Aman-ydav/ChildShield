@@ -1,8 +1,13 @@
-<nav class="navbar navbar-expand-lg navbar-dark childshield-navbar sticky-top shadow-sm">
+<nav class="navbar navbar-expand-lg navbar-light childshield-navbar fixed-top shadow-sm" role="navigation">
     <div class="container">
         <a class="navbar-brand fw-bold letter-spacing d-flex align-items-center" href="{{ route('home') }}" style="gap: 0.5rem;">
-            {{ __('childshield.brand') }}
-            <span class="text-warning badge bg-dark">{{ __('childshield.tagline') }}</span>
+            <span class="geo-logo" aria-hidden="true">
+                <span class="circle" aria-hidden="true"></span>
+                <span class="square" aria-hidden="true"></span>
+                <span class="triangle" aria-hidden="true"></span>
+            </span>
+            <span class="ms-2">{{ __('childshield.brand') }}</span>
+            <span class="text-dark small ms-3">{{ __('childshield.tagline') }}</span>
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#childShieldNav" aria-controls="childShieldNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -26,11 +31,11 @@
                 @auth
                     <form method="POST" action="{{ route('logout') }}" class="m-0">
                         @csrf
-                        <button class="btn btn-outline-light btn-sm px-3" type="submit">Logout</button>
+                        <button class="bauhaus-btn bauhaus-btn--red btn-sm px-3" type="submit">Logout</button>
                     </form>
                 @else
-                    <a class="btn btn-outline-light btn-sm px-3" href="{{ route('login') }}">Login</a>
-                    <a class="btn btn-warning btn-sm px-3" href="{{ route('register') }}">Register</a>
+                    <a class="bauhaus-btn bauhaus-btn--red btn-sm px-3" href="{{ route('login') }}">Login</a>
+                    <a class="bauhaus-btn bauhaus-btn--yellow btn-sm px-3" href="{{ route('register') }}">Register</a>
                 @endauth
             </div>
         </div>

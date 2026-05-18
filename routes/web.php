@@ -40,3 +40,7 @@ Route::prefix('admin')
     });
 
 require __DIR__.'/auth.php';
+
+// Simple informational pages used in footer links
+Route::view('/privacy', 'privacy')->name('privacy');
+Route::view('/terms', 'terms')->name('terms');

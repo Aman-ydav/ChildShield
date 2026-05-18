@@ -7,6 +7,10 @@
     <title>{{ config('app.name', __('childshield.brand')) }}</title>
     <meta name="description" content="{{ __('childshield.tagline') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+    <!-- Fonts: Outfit (Bauhaus) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;900&display=swap" rel="stylesheet">
     <style>
         .accordion {
             display: block !important;
@@ -28,7 +32,7 @@
     @include('layouts.navbar')
 
     <main class="childshield-main">
-        <div class="container py-4 py-lg-5">
+        <div class="py-4 py-lg-5">
             @if (session('status'))
                 <div class="alert alert-success alert-dismissible fade show shadow-sm" role="alert">
                     {{ session('status') }}

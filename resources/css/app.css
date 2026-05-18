@@ -21,7 +21,7 @@ html {
 body.childshield-body {
 	background: linear-gradient(180deg, #f8fbff 0%, #eef4fb 100%);
 	color: #0f172a;
-	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+	font-family: 'Outfit', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
 }
 
 /* NAVBAR STYLES */
@@ -29,6 +29,10 @@ body.childshield-body {
 	background: linear-gradient(90deg, var(--childshield-blue-2), var(--childshield-blue));
 	box-shadow: 0 2px 12px rgba(18, 49, 91, 0.1);
 	z-index: 1030;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
 	display: block !important;
 	visibility: visible !important;
 }
@@ -112,6 +116,8 @@ body.childshield-body {
 }
 
 .childshield-main {
+	/* offset content to account for fixed navbar height */
+	padding-top: 84px;
 	min-height: calc(100vh - 140px);
 }
 
@@ -441,3 +447,84 @@ body.childshield-body {
 		width: auto;
 	}
 }
+
+/* ===== Bauhaus design system overrides and helpers ===== */
+:root{
+	--bauhaus-background: #F0F0F0;
+	--bauhaus-foreground: #121212;
+	--bauhaus-red: #D02020;
+	--bauhaus-blue: #1040C0;
+	--bauhaus-yellow: #F0C020;
+	--bauhaus-border: #121212;
+	--bauhaus-muted: #E0E0E0;
+}
+
+/* Navbar: strong bottom border and neutral canvas */
+.childshield-navbar{
+	background: var(--bauhaus-background) !important;
+	border-bottom: 4px solid var(--bauhaus-border) !important;
+	box-shadow: none !important;
+}
+
+.navbar-brand{
+	color: var(--bauhaus-foreground) !important;
+	font-family: 'Outfit', sans-serif !important;
+	text-transform: uppercase;
+	letter-spacing: 0.08em;
+	display:flex;align-items:center;gap:.5rem
+}
+
+/* Ensure nav links are visible on the Bauhaus light navbar */
+.childshield-navbar .nav-link{
+	color: var(--bauhaus-foreground) !important;
+	font-weight:700;
+	text-transform:uppercase;
+	letter-spacing:0.04em;
+}
+.childshield-navbar .nav-link:hover{
+	color: var(--bauhaus-red) !important;
+}
+
+.childshield-navbar .btn{
+	border-width:2px;
+	border-color:var(--bauhaus-border);
+}
+
+/* geometric logo shapes inside brand */
+.geo-logo{display:inline-flex;gap:6px;align-items:center}
+.geo-logo .circle{width:16px;height:16px;border-radius:9999px;background:var(--bauhaus-red);border:2px solid var(--bauhaus-border)}
+.geo-logo .square{width:16px;height:16px;background:var(--bauhaus-blue);border:2px solid var(--bauhaus-border)}
+.geo-logo .triangle{width:0;height:0;border-left:9px solid transparent;border-right:9px solid transparent;border-bottom:16px solid var(--bauhaus-yellow);transform:translateY(-2px);border-bottom-color:var(--bauhaus-yellow)}
+
+/* Bauhaus buttons */
+.bauhaus-btn{display:inline-flex;align-items:center;justify-content:center;padding:.6rem 1rem;border:2px solid var(--bauhaus-border);font-weight:700;text-transform:uppercase;font-family:'Outfit',sans-serif}
+.bauhaus-btn--red{background:var(--bauhaus-red);color:white;box-shadow:4px 4px 0 0 var(--bauhaus-border)}
+.bauhaus-btn--blue{background:var(--bauhaus-blue);color:white;box-shadow:4px 4px 0 0 var(--bauhaus-border)}
+.bauhaus-btn--yellow{background:var(--bauhaus-yellow);color:var(--bauhaus-foreground);box-shadow:4px 4px 0 0 var(--bauhaus-border)}
+.bauhaus-btn:active{transform:translate(2px,2px);box-shadow:none}
+
+/* Card */
+.bauhaus-card{background:white;border:4px solid var(--bauhaus-border);box-shadow:8px 8px 0 0 var(--bauhaus-border);padding:1.25rem;border-radius:0}
+
+/* Utility hard shadows */
+.shadow-bauhaus-sm{box-shadow:3px 3px 0 0 var(--bauhaus-border)!important}
+.shadow-bauhaus-md{box-shadow:6px 6px 0 0 var(--bauhaus-border)!important}
+.shadow-bauhaus-lg{box-shadow:8px 8px 0 0 var(--bauhaus-border)!important}
+
+/* Small helpers */
+.bauhaus-uppercase{text-transform:uppercase;font-weight:900;letter-spacing:-0.02em}
+.bauhaus-subhead{text-transform:uppercase;font-weight:700;letter-spacing:0.06em}
+
+/* Ensure images default to grayscale and reveal color on hover */
+.bauhaus-img{filter:grayscale(100%);transition:filter .2s ease}
+.bauhaus-img:hover{filter:grayscale(0%)}
+
+/* Make auth forms adopt Bauhaus card */
+.bauhaus-auth-wrapper{max-width:540px;margin:0 auto}
+
+/* small responsive adjustments */
+@media (max-width:767px){
+	.geo-logo .circle,.geo-logo .square{width:12px;height:12px}
+}
+
+/* End Bauhaus overrides */

@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="row justify-content-center align-items-center" style="min-height: 600px;">
-        <div class="col-md-6 col-lg-5">
+        <div class="col-md-6 col-lg-5 bauhaus-auth-wrapper">
             <!-- BACK LINK -->
             <div class="mb-4">
                 <a href="{{ route('home') }}" class="btn btn-outline-primary btn-sm">
@@ -10,7 +10,7 @@
                 </a>
             </div>
 
-            <div class="section-surface p-5 p-lg-6 rounded-4">
+            <div class="bauhaus-card p-5 p-lg-6">
                 <!-- HEADER -->
                 <div class="text-center mb-4">
                     <h1 class="h3 fw-bold text-primary mb-2">Join ChildShield</h1>
@@ -69,7 +69,7 @@
                     </div>
 
                     <!-- Submit Button -->
-                    <button type="submit" class="btn btn-warning btn-lg w-100 fw-semibold mb-3">Create Account</button>
+                    <button type="submit" class="bauhaus-btn bauhaus-btn--yellow w-100 mb-3">Create Account</button>
 
                     <!-- DIVIDER -->
                     <div class="position-relative mb-3">
@@ -81,7 +81,7 @@
                 <div class="text-center">
                     <p class="text-secondary small mb-0">
                         Already have an account?
-                        <a href="{{ route('login') }}" class="fw-semibold text-primary text-decoration-none">Sign in here</a>
+                        <a href="{{ route('login') }}" class="fw-semibold text-decoration-none bauhaus-btn bauhaus-btn--blue ms-2">Sign in here</a>
                     </p>
                 </div>
             </div>
