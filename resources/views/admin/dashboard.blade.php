@@ -7,7 +7,10 @@
                 <h1 class="bauhaus-uppercase text-3xl mb-1">Admin Dashboard</h1>
                 <p class="text-secondary mb-0">Monitor and manage all ChildShield cases from one control panel.</p>
             </div>
-            <a href="{{ route('admin.reports.index') }}" class="bauhaus-btn bauhaus-btn--red">Manage Reports</a>
+            <div class="d-flex flex-wrap gap-2">
+                <a href="{{ route('admin.reports.index') }}" class="bauhaus-btn bauhaus-btn--red">Manage Reports</a>
+                <a href="{{ route('admin.contacts.index') }}" class="bauhaus-btn bauhaus-btn--outline">Contact Submissions</a>
+            </div>
         </div>
 
         <div class="row g-3 mb-4">
@@ -22,12 +25,32 @@
         <div class="row g-4">
             <div class="col-lg-7">
                 <div class="bauhaus-card p-4">
-                    <h2 class="h5 fw-bold mb-3">Monthly Reports</h2>
-                    <canvas id="monthlyReportsChart" height="120"></canvas>
+                    <h2 class="h5 fw-bold mb-3">Reports Overview</h2>
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="border rounded-4 p-3 h-100">
+                                <div class="text-secondary small">Monthly trend</div>
+                                <div class="h2 fw-bold mb-1">{{ $stats['total'] }}</div>
+                                <div class="small text-secondary">Total reports tracked in the system.</div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="border rounded-4 p-3 h-100">
+                                <div class="text-secondary small mb-2">Status breakdown</div>
+                                <div class="d-grid gap-2 small">
+                                    <div class="d-flex justify-content-between"><span>Pending</span><strong>{{ $stats['pending'] }}</strong></div>
+                                    <div class="d-flex justify-content-between"><span>Under Review</span><strong>{{ $stats['underReview'] }}</strong></div>
+                                    <div class="d-flex justify-content-between"><span>Verified</span><strong>{{ $stats['verified'] }}</strong></div>
+                                    <div class="d-flex justify-content-between"><span>Resolved</span><strong>{{ $stats['resolved'] }}</strong></div>
+                                    <div class="d-flex justify-content-between"><span>Rejected</span><strong>{{ $stats['rejected'] }}</strong></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-5">
-                <div class="bauhaus-card p-4 h-100">
+                <div class="bauhaus-card p-4 mb-4">
                     <h2 class="h5 fw-bold mb-3">Recent Cases</h2>
                     <div class="d-grid gap-3">
                         @foreach ($reports as $report)
@@ -41,39 +64,14 @@
                         @endforeach
                     </div>
                 </div>
+
+                <div class="bauhaus-card p-4">
+                    <h2 class="h5 fw-bold mb-3">Support Contact</h2>
+                    <div class="small text-secondary mb-2">All contact-form submissions are delivered to the support mailbox.</div>
+                    <div class="fw-semibold">support@childshield.test</div>
+                    <div class="small text-secondary mt-2">For urgent issues, ask the sender to include a phone number and location in the message.</div>
+                </div>
             </div>
         </div>
     </div>
-
-    @push('scripts')
-        <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.3/dist/chart.umd.min.js"></script>
-        <script>
-            const monthlyData = @json($monthlySeries);
-            const labels = Object.keys(monthlyData);
-            const values = Object.values(monthlyData);
-            const canvas = document.getElementById('monthlyReportsChart');
-
-            if (canvas) {
-                new Chart(canvas, {
-                    type: 'bar',
-                    data: {
-                        labels,
-                        datasets: [{
-                            label: 'Reports',
-                            data: values,
-                            backgroundColor: '#ff6b00',
-                            borderRadius: 10,
-                        }]
-                    },
-                    options: {
-                        responsive: true,
-                        plugins: { legend: { display: false } },
-                        scales: {
-                            y: { beginAtZero: true, ticks: { precision: 0 } }
-                        }
-                    }
-                });
-            }
-        </script>
-    @endpush
 @endsection

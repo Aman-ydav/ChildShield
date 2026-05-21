@@ -11,6 +11,16 @@ class ContactFormRequest extends FormRequest
         return true;
     }
 
+    protected function prepareForValidation(): void
+    {
+        $this->merge([
+            'name' => $this->name ? trim(strip_tags($this->name)) : null,
+            'email' => $this->email ? trim(strip_tags($this->email)) : null,
+            'subject' => $this->subject ? trim(strip_tags($this->subject)) : null,
+            'message' => $this->message ? trim(strip_tags($this->message)) : null,
+        ]);
+    }
+
     public function rules(): array
     {
         return [

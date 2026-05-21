@@ -33,6 +33,8 @@ Route::prefix('admin')
     ->middleware(['auth', 'admin'])
     ->group(function (): void {
         Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
+        Route::get('/contacts', [AdminController::class, 'contactSubmissions'])->name('admin.contacts.index');
+        Route::get('/contacts/{contactSubmission}', [AdminController::class, 'showContactSubmission'])->name('admin.contacts.show');
         Route::get('/reports', [AdminController::class, 'reports'])->name('admin.reports.index');
         Route::get('/reports/{report}', [AdminController::class, 'show'])->name('admin.reports.show');
         Route::patch('/reports/{report}/status', [AdminController::class, 'updateStatus'])->name('admin.reports.status');

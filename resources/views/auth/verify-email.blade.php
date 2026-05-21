@@ -1,31 +1,32 @@
-<x-guest-layout>
-    <div class="mb-4 text-sm text-gray-600 dark:text-gray-400">
-        {{ __('Thanks for signing up! Before getting started, could you verify your email address by clicking on the link we just emailed to you? If you didn\'t receive the email, we will gladly send you another.') }}
-    </div>
+@extends('layouts.master')
 
-    @if (session('status') == 'verification-link-sent')
-        <div class="mb-4 font-medium text-sm text-green-600 dark:text-green-400">
-            {{ __('A new verification link has been sent to the email address you provided during registration.') }}
-        </div>
-    @endif
+@section('content')
+    <div class="row justify-content-center align-items-center" style="min-height: 600px;">
+        <div class="col-md-6 col-lg-5 bauhaus-auth-wrapper">
+            <div class="bauhaus-card p-5 p-lg-6">
+                <div class="text-center mb-4">
+                    <h1 class="h3 fw-bold text-primary mb-2">Verify Your Email</h1>
+                    <p class="text-secondary mb-0">We sent a verification link to your email address. Please confirm before continuing.</p>
+                </div>
 
-    <div class="mt-4 flex items-center justify-between">
-        <form method="POST" action="{{ route('verification.send') }}">
-            @csrf
+                @if (session('status') == 'verification-link-sent')
+                    <div class="alert alert-success" role="alert">
+                        A new verification link has been sent to the email address you provided during registration.
+                    </div>
+                @endif
 
-            <div>
-                <x-primary-button>
-                    {{ __('Resend Verification Email') }}
-                </x-primary-button>
+                <div class="d-grid gap-3">
+                    <form method="POST" action="{{ route('verification.send') }}">
+                        @csrf
+                        <button type="submit" class="bauhaus-btn bauhaus-btn--red w-100">Resend Verification Email</button>
+                    </form>
+
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button type="submit" class="bauhaus-btn bauhaus-btn--outline w-100">Log Out</button>
+                    </form>
+                </div>
             </div>
-        </form>
-
-        <form method="POST" action="{{ route('logout') }}">
-            @csrf
-
-            <button type="submit" class="underline text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800">
-                {{ __('Log Out') }}
-            </button>
-        </form>
+        </div>
     </div>
-</x-guest-layout>
+@endsection

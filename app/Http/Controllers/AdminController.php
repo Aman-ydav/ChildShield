@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Report;
+use App\Models\ContactSubmission;
 use App\Services\CaseNotificationService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -29,7 +30,6 @@ class AdminController extends Controller
                 'rejected' => Report::where('status', Report::STATUS_REJECTED)->count(),
             ],
             'reports' => $reports,
-            'monthlySeries' => $this->monthlySeries(),
         ]);
     }
 
@@ -85,12 +85,22 @@ class AdminController extends Controller
         return back()->with('status', __('childshield.report_deleted'));
     }
 
-    private function monthlySeries(): array
+    public function contactSubmissions(Request $request): View
     {
-        return Report::query()
-            ->get()
-            ->groupBy(fn (Report $report) => $report->created_at->format('M'))
-            ->map->count()
-            ->toArray();
+        $contacts = ContactSubmission::latest()
+            ->when($request->filled('search'), fn($q) => $q->where('name', 'like', '%'.$request->string('search')->toString().'%')->orWhere('email', 'like', '%'.$request->string('search')->toString().'%')->orWhere('subject', 'like', '%'.$request->string('search')->toString().'%'))
+            ->paginate(12)
+            ->withQueryString();
+
+        return view('admin.contacts.index', [
+            'contacts' => $contacts,
+        ]);
+    }
+
+    public function showContactSubmission(ContactSubmission $contactSubmission): View
+    {
+        return view('admin.contacts.show', [
+            'contact' => $contactSubmission,
+        ]);
     }
 }

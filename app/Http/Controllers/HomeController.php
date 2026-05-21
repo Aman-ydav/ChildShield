@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\ContactFormRequest;
 use App\Mail\SystemNotificationMail;
+use App\Models\ContactSubmission;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\View\View;
@@ -34,10 +35,21 @@ class HomeController extends Controller
     public function sendContact(ContactFormRequest $request): RedirectResponse
     {
         $supportEmail = config('mail.from.address') ?: 'support@childshield.test';
+        $validated = $request->validated();
+
+        // Persist submission for admin review
+        ContactSubmission::create([
+            'user_id' => $request->user()?->id,
+            'name' => $validated['name'] ?? null,
+            'email' => $validated['email'] ?? null,
+            'subject' => $validated['subject'] ?? null,
+            'message' => $validated['message'] ?? null,
+            'ip_address' => $request->ip(),
+        ]);
 
         Mail::to($supportEmail)->send(new SystemNotificationMail(
-            subjectLine: 'ChildShield contact enquiry: '.$request->validated('subject'),
-            messageBody: "Name: {$request->validated('name')}\nEmail: {$request->validated('email')}\n\n{$request->validated('message')}",
+            subjectLine: 'ChildShield contact enquiry: '.$validated['subject'],
+            messageBody: "Name: {$validated['name']}\nEmail: {$validated['email']}\n\n{$validated['message']}",
         ));
 
         return back()->with('status', __('childshield.contact_sent'));
