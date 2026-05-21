@@ -14,7 +14,13 @@
             </div>
 
             <div class="relative">
-                <div class="w-full h-[420px] bg-white border-4 border-[var(--bauhaus-border)] overflow-hidden relative">
+                @php
+                    $bgImage = \Illuminate\Support\Facades\Storage::disk('public')->exists('childlabour/ugm-un.jpg')
+                        ? \Illuminate\Support\Facades\Storage::url('childlabour/ugm-un.jpg')
+                        : null;
+                @endphp
+
+                <div class="w-full h-[420px] bg-white border-4 border-[var(--bauhaus-border)] overflow-hidden relative" style="{{ $bgImage ? "background-image: url('{$bgImage}'); background-size: cover; background-position: center;" : '' }}">
                     <div class="absolute" style="left:6%;top:8%;">
                         <div style="width:140px;height:140px;background:var(--bauhaus-yellow);border:6px solid var(--bauhaus-border);transform:rotate(40deg);"></div>
                     </div>
